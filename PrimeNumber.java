@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class PrimeNumber {
     public static boolean prime(int a) {
-        if (a == 1) {
+        if (a < 2) {
             return false;
         }
         for (int i = 2; i <= a / 2; i++) {
