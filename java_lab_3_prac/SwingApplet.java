@@ -1,108 +1,113 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.JOptionPane;
 
-public class SwingApplet extends JFrame implements ActionListener {
-    JLabel l1, l2, l3, l4, l5;
-    JTextField nameField1, nameField2, amountField;
-    JTextField balanceField1, balanceField2;
-    JButton deposit1Btn, withdraw1Btn, deposit2Btn, withdraw2Btn, transferBtn, clearBtn;
-    double balance1 = 0.0, balance2 = 0.0;
+public class SwingApplet extends JFrame implements ActionListener{
+    JLabel l1 , l2 , l3 , l4 ;
+    JButton depostitea1Btn , depositea2Btn , withDrawa1Btn , withDrawa2Btn , transfera1_a2Btn , transfera2_a1Btn , clearBtn;
+    JTextField amnt , balancefa1 , balancefa2; 
+    int balancea1 , balancea2;
+    public SwingApplet(){
+        setSize(500,350);
+        setLayout(new GridLayout(7,2,10,10));
+        setTitle("Banking System");
+        l1 = new JLabel("Amount");
+        amnt = new JTextField(15);
+        l2 = new JLabel("Balance A1");
+        balancefa1 = new JTextField(15);
+        balancefa1.setEditable(false);
+        l3 = new JLabel("Balance A2");
+        balancefa2 = new JTextField(15);
+        balancefa2.setEditable(false);
 
-    public SwingApplet() {
-        setTitle("Simple Banking System");
-        setSize(500, 350);
-        setLayout(new GridLayout(7, 2, 10, 10));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        depostitea1Btn = new JButton("Deposit A1");
 
-        l1 = new JLabel("Account 1 Name:");
-        nameField1 = new JTextField(15);
+        depositea2Btn = new JButton("Deposit A2");
 
-        l2 = new JLabel("Account 2 Name:");
-        nameField2 = new JTextField(15);
+        withDrawa1Btn = new JButton("Withdraw A1");
 
-        l3 = new JLabel("Amount:");
-        amountField = new JTextField(10);
-
-        l4 = new JLabel("Account 1 Balance:");
-        balanceField1 = new JTextField("0.0", 10);
-        balanceField1.setEditable(false);
-
-        l5 = new JLabel("Account 2 Balance:");
-        balanceField2 = new JTextField("0.0", 10);
-        balanceField2.setEditable(false);
-
-        deposit1Btn = new JButton("Deposit A1");
-        withdraw1Btn = new JButton("Withdraw A1");
-        deposit2Btn = new JButton("Deposit A2");
-        withdraw2Btn = new JButton("Withdraw A2");
-        transferBtn = new JButton("Transfer A1->A2");
+        withDrawa2Btn = new JButton("Withdraw A2");
+        transfera1_a2Btn = new JButton("Transfer A1->A2");
+        transfera2_a1Btn = new JButton("Transfer A2->A1");
         clearBtn = new JButton("Clear");
-
-        // Add components
-       
-        add(l3); add(amountField);
-        add(l4); add(balanceField1);
-        add(l5); add(balanceField2);
-        add(deposit1Btn); add(withdraw1Btn);
-        add(deposit2Btn); add(withdraw2Btn);
-        add(transferBtn); add(clearBtn);
-
-        // Add listeners
-        deposit1Btn.addActionListener(this);
-        withdraw1Btn.addActionListener(this);
-        deposit2Btn.addActionListener(this);
-        withdraw2Btn.addActionListener(this);
-        transferBtn.addActionListener(this);
-        clearBtn.addActionListener(this);
-
+        add(l1);add(amnt);
+        add(l2);add(balancefa1);
+        add(l3);add(balancefa2);
+        add(depostitea1Btn);add(depositea2Btn);
+        add(withDrawa1Btn);add(withDrawa2Btn);
+        add(transfera1_a2Btn);add(transfera2_a1Btn);
+        add(clearBtn);
         setVisible(true);
+
+        depostitea1Btn.addActionListener(this);
+        depositea2Btn.addActionListener(this);
+        withDrawa1Btn.addActionListener(this);
+        withDrawa2Btn.addActionListener(this);
+        transfera1_a2Btn.addActionListener(this);
+        transfera2_a1Btn.addActionListener(this);
+        clearBtn.addActionListener(this);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void actionPerformed(ActionEvent ae) {
-        String cmd = ae.getActionCommand();
-        double amt = 0;
-
-        try {
-            if (!amountField.getText().isEmpty())
-                amt = Double.parseDouble(amountField.getText());
-
-            switch (cmd) {
-                case "Deposit A1":
-                    balance1 += amt; break;
-                case "Withdraw A1":
-                    if (amt <= balance1) balance1 -= amt;
-                    else JOptionPane.showMessageDialog(this, "Insufficient balance in Account 1");
-                    break;
-                case "Deposit A2":
-                    balance2 += amt; break;
-                case "Withdraw A2":
-                    if (amt <= balance2) balance2 -= amt;
-                    else JOptionPane.showMessageDialog(this, "Insufficient balance in Account 2");
-                    break;
-                case "Transfer A1->A2":
-                    if (amt <= balance1) {
-                        balance1 -= amt;
-                        balance2 += amt;
-                    } else JOptionPane.showMessageDialog(this, "Insufficient balance in Account 1");
-                    break;
-                case "Clear":
-                    nameField1.setText(""); 
-                    nameField2.setText("");
-                    amountField.setText(""); 
-                    balance1 = 0; 
-                    balance2 = 0;
-            }
-
-            balanceField1.setText(String.valueOf(balance1));
-            balanceField2.setText(String.valueOf(balance2));
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Enter a valid number!");
+    public void actionPerformed(ActionEvent e){
+        String cmd = e.getActionCommand();
+        int amt =0;
+        
+        if(!amnt.getText().isEmpty()){
+            amt = Integer.parseInt(amnt.getText());
         }
+
+        switch(cmd){
+            case "Deposit A1":
+                balancea1 += amt;
+                break;
+            case "Deposit A2":
+                balancea2 += amt;
+                break;
+            case "Withdraw A1":
+                if(amt <= balancea1){
+                    balancea1 -= amt;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Insufficient Balance in A1");
+                }
+                break;
+            case "Withdraw A2":
+                if(amt <= balancea2){
+                    balancea2 -= amt;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Insufficient Balance in A2");
+                }
+            case "Transfer A1->A2":
+                if(amt <= balancea1){
+                    balancea1 -= amt;
+                    balancea2 += amt;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Insufficient Balance in A1");
+                } break;
+            case "Transfer A2->A1":
+                if(amt <= balancea2){
+                    balancea2 -= amt;
+                    balancea1 += amt;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Insufficient Balance in A2");
+                }break;
+            case "Clear":
+                amnt.setText("");
+                balancea1 = 0;
+                balancea2 = 0;
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Invalid Input");
+                break;
+        }
+        balancefa1.setText(String.valueOf(balancea1));
+        balancefa2.setText(String.valueOf(balancea2));
+
+
     }
 
-    public static void main(String[] args) {
+    public static void main(String args[]){
         new SwingApplet();
     }
 }
