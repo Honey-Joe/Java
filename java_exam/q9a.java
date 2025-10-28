@@ -79,3 +79,27 @@ class q9a {
         acc.displayAccountInfo();
     }
 }
+
+// Why encapsulation is important in the context of data protection
+
+// Encapsulation hides the internal details of a class from outside access.
+
+// Sensitive information like balance or accountNumber is not directly accessible — it can only be modified through controlled methods.
+
+// This ensures data integrity and prevents unauthorized access or modification.
+
+// 2️⃣ How getter and setter methods help maintain encapsulation
+
+// Getters provide read-only access to private data.
+
+// Setters allow controlled modification — for example, rejecting negative balances.
+
+// Together, they ensure that only valid, verified data can enter the object.
+
+// 3️⃣ How encapsulation promotes flexibility and security in software design
+
+// You can change the internal implementation (like adding validation or database logic) without affecting other parts of the program.
+
+// Keeps data secure and consistent.
+
+// Improves maintainability and reusability of code, since only public methods control data access.
