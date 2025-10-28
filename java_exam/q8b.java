@@ -14,8 +14,7 @@ class q8b{
             sum += digit;
             // System.out.println(digit);
             temp = temp/10;
-        }
-
+        }   
         System.out.println(sum);
     }
 }
